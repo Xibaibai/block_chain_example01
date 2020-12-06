@@ -115,4 +115,21 @@ public final class MyContract implements ContractInterface {
         intValueB =  intValueB + intValueTrans;
         stub.putStringState(keyTo, String.valueOf(intValueB));
     }
+
+    @Transaction(name = "ReCharge", intent = Transaction.TYPE.EVALUATE)
+    public void reCharge(final Context ctx, String key, String value) {
+        ChaincodeStub stub = ctx.getStub();
+
+        try {
+            Integer.valueOf(value);
+        } catch (Exception e) {
+            String errorMessage = String.format(Message.BALANCE_INVALID.template(), key, value);
+            System.out.println(errorMessage);
+            throw new ChaincodeException(errorMessage, e);
+        }
+
+        String balance = stub.getStringState(key);
+        Integer recharged = Integer.valueOf(value)+Integer.valueOf(balance);
+        stub.putStringState(key,recharged.toString());
+    }
 }
