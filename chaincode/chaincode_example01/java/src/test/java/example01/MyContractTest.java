@@ -44,4 +44,18 @@ public class MyContractTest {
             assertThat(contract.hi(ctx).equals("Fabric@Java"));
         }
     }
+
+//    @Nested
+//    class InvokeSetValueTransaction{
+//        @Test
+//        public void setValue(){
+//            MyContract contract = new MyContract();
+//            Context ctx = mock(Context.class);
+//            ChaincodeStub stub = mock(ChaincodeStub.class);
+//            when(ctx.getStub()).thenReturn(stub);
+//            when(stub.getStringState("Name")).thenReturn("Fabric@Java");
+//            assertThat(contract.setValue(ctx));
+//        }
+//
+//    }
 }
